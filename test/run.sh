@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Runs both CLIs against a local mock server and checks the requests they make.
 set -u
-cd "$(dirname "$0")/.."
+cd "$(dirname "$0")/.." || exit 1
 PORT=18765
 LOG=$(mktemp)
 python3 test/mock_server.py "$PORT" "$LOG" &
@@ -35,7 +35,7 @@ out=$(bin/smsgora account); echo "$out" | grep -q '"ok"' && pass "smsgora prints
 if SMSGORA_BASE_URL="http://127.0.0.1:$PORT/fail" bin/smsgora account 2>err.txt; then fail "smsgora error exit"; else
   grep -q "Too many requests (HTTP 429)" err.txt && pass "smsgora error message" || fail "smsgora error message: $(cat err.txt)"; fi
 bin/smsgora send --to +1 >/dev/null 2>&1; [ $? -eq 2 ] && pass "smsgora usage error" || fail "smsgora usage error"
-SMSGORA_KEY= bin/smsgora account >/dev/null 2>&1; [ $? -eq 2 ] && pass "smsgora needs key" || fail "smsgora needs key"
+SMSGORA_KEY="" bin/smsgora account >/dev/null 2>&1; [ $? -eq 2 ] && pass "smsgora needs key" || fail "smsgora needs key"
 
 bin/waservix --version | grep -q "waservix 1.0.0" && pass "waservix --version" || fail "waservix --version"
 bin/waservix send --to +1555 --text "hello" >/dev/null

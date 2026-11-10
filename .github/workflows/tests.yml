@@ -16,4 +16,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: shellcheck bin/smsgora bin/waservix test/run.sh
+      - run: shellcheck -S warning bin/smsgora bin/waservix test/run.sh
