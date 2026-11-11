@@ -2,6 +2,8 @@
 
 [![tests](https://github.com/TekservixHQ/tekservix-cli/actions/workflows/tests.yml/badge.svg)](https://github.com/TekservixHQ/tekservix-cli/actions/workflows/tests.yml)
 
+Official command-line tools for the SMS Gora SMS Gateway and the **WAservix WhatsApp API Gateway** by Tekservix.
+
 Command-line tools for two Tekservix messaging APIs:
 
 - **`smsgora`**: send and receive SMS through your own Android phones with the [SMS Gora SMS Gateway](https://tekservix.com/smsgora/)
